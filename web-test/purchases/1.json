@@ -1,0 +1,12 @@
+{
+    'id': 1,
+    'date': '2013-09-01T00:00:00Z',
+    'lines': [
+        {
+            'id': 1,
+            'qty': 2,
+            'productName': 'Harry Potter',
+            'unitPrice': 150
+        }
+    ]
+}
