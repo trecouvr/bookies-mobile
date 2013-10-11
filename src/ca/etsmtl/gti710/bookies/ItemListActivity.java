@@ -1,9 +1,11 @@
 package ca.etsmtl.gti710.bookies;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
+import retrofit.converter.GsonConverter;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -15,7 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import ca.etsmtl.gti710.bookies.model.AppContent;
-import ca.etsmtl.gti710.bookies.model.Purchase;
+import ca.etsmtl.gti710.bookies.model.Order;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * An activity representing a list of Items. This activity has different
@@ -36,7 +41,8 @@ public class ItemListActivity extends FragmentActivity implements
 		ItemListFragment.Callbacks {
 
 	public static String SECRET = "abc";
-	public static String END_POINT = "https://dl.dropboxusercontent.com/u/12920251/";
+	//public static String END_POINT = "https://dl.dropboxusercontent.com/u/12920251/";
+	public static String END_POINT = "http://10.196.113.44/bookies/web/app_dev.php/api/";
 	protected BookiesService service;
 	protected GetDataTask task = null;
 	protected ProgressDialog progressDialog = null;
@@ -69,14 +75,19 @@ public class ItemListActivity extends FragmentActivity implements
 		
 		//
 		
-
+		Gson gson = new GsonBuilder()
+		 //.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+		 .setDateFormat("yyyy-MM-dd HH:mm:ss")
+		 .create();
+		
 		RestAdapter restAdapter = new RestAdapter.Builder()
 	    				.setServer(END_POINT)
+	    				.setConverter(new GsonConverter(gson))
 	    				.build();
 
 		service = restAdapter.create(BookiesService.class);
 		
-		AppContent.purchases.clear();
+		AppContent.orders.clear();
 		
 		startGetDataTask();
 	}
@@ -180,9 +191,9 @@ public class ItemListActivity extends FragmentActivity implements
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			try {
-				ArrayList<Purchase> data = service.listPurchases();
-				AppContent.purchases.clear();
-				AppContent.purchases.addAll(data);
+				ArrayList<Order> data = service.listPurchases();
+				AppContent.orders.clear();
+				AppContent.orders.addAll(data);
 			}
 			catch (RetrofitError e) {
 				e.printStackTrace();
@@ -196,8 +207,8 @@ public class ItemListActivity extends FragmentActivity implements
 			task = null;
 			cancelProgress();
 			if (success) {
-				for (Purchase purchase : AppContent.purchases) {
-					Log.d("coucou", purchase.toString());
+				for (Order order : AppContent.orders) {
+					Log.d("coucou", order.toString());
 				}
 				ItemListFragment frag = ((ItemListFragment) getSupportFragmentManager().findFragmentById(
 						R.id.item_list));

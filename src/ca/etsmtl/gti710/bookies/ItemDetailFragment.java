@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+import ca.etsmtl.gti710.adapters.OrderLineListAdapter;
 import ca.etsmtl.gti710.bookies.model.AppContent;
-import ca.etsmtl.gti710.bookies.model.Purchase;
+import ca.etsmtl.gti710.bookies.model.Order;
 
 
 /**
@@ -25,7 +27,12 @@ public class ItemDetailFragment extends Fragment {
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
-	private Purchase purchase;
+	protected Order order;
+	
+	/**
+	 * the list adapter to display lines
+	 */
+	protected OrderLineListAdapter adapter;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -43,9 +50,9 @@ public class ItemDetailFragment extends Fragment {
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
 			String id = getArguments().getString(ARG_ITEM_ID);
-			for (Purchase pur : AppContent.purchases) {
+			for (Order pur : AppContent.orders) {
 				if (pur.id.equals(id)) {
-					purchase = pur;
+					order = pur;
 				}
 			}
 		}
@@ -58,9 +65,16 @@ public class ItemDetailFragment extends Fragment {
 				container, false);
 
 		// Show the dummy content as text in a TextView.
-		if (purchase != null) {
-			((TextView) rootView.findViewById(R.id.item_detail))
-					.setText(purchase.toString());
+		if (order != null) {
+			((TextView) rootView.findViewById(R.id.text))
+					.setText("Purchase #"+order.id);
+
+	        ListView lv = (ListView)rootView.findViewById(R.id.list);
+
+	        adapter = new OrderLineListAdapter(getActivity(), 
+	        		R.layout.orderline_list_item, order.lines);
+	        
+	        lv.setAdapter(adapter);
 		}
 
 		return rootView;

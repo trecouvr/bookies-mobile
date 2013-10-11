@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import ca.etsmtl.gti710.adapters.OrderListAdapter;
 import ca.etsmtl.gti710.bookies.model.AppContent;
-import ca.etsmtl.gti710.bookies.model.Purchase;
 
 /**
  * A list fragment representing a list of Items. This fragment also supports
@@ -20,7 +19,7 @@ import ca.etsmtl.gti710.bookies.model.Purchase;
  */
 public class ItemListFragment extends ListFragment {
 	
-	protected ArrayAdapter<Purchase> adapter = null;
+	protected OrderListAdapter adapter = null;
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -73,9 +72,9 @@ public class ItemListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 
 		// TODO: replace with a real list adapter.
-		adapter = new ArrayAdapter<Purchase>(getActivity(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, AppContent.purchases);
+		adapter = new OrderListAdapter(getActivity(),
+				R.layout.order_list_item,
+				AppContent.orders);
 		setListAdapter(adapter);
 	}
 
@@ -119,7 +118,7 @@ public class ItemListFragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(""+AppContent.purchases.get(position).id);
+		mCallbacks.onItemSelected(""+AppContent.orders.get(position).id);
 	}
 
 	@Override
