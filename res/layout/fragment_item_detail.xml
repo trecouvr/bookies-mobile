@@ -7,11 +7,27 @@
     tools:context=".ItemDetailFragment" >
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="TextView" />
+        android:text="purchase #1" />
+    
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:text="total" />
+    
+    <TextView
+        android:id="@+id/customer_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:text="adresse" />
 
     <ListView
         android:id="@+id/list"

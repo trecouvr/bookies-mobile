@@ -66,9 +66,13 @@ public class ItemDetailFragment extends Fragment {
 
 		// Show the dummy content as text in a TextView.
 		if (order != null) {
-			((TextView) rootView.findViewById(R.id.text))
+			((TextView) rootView.findViewById(R.id.title))
 					.setText("Purchase #"+order.id);
-
+			((TextView) rootView.findViewById(R.id.total))
+					.setText(order.formattedTotal());
+			((TextView) rootView.findViewById(R.id.customer_address))
+					.setText(order.customer_address);
+			
 	        ListView lv = (ListView)rootView.findViewById(R.id.list);
 
 	        adapter = new OrderLineListAdapter(getActivity(), 

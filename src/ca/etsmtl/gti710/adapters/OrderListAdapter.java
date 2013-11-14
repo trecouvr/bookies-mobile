@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ public class OrderListAdapter extends ArrayAdapter<Order>{
 	private static class ViewHolder {
 		TextView id;
 		TextView customer_name;
+		TextView total;
 		TextView date;
 	}
 
@@ -39,6 +39,7 @@ public class OrderListAdapter extends ArrayAdapter<Order>{
         	holder = new ViewHolder();
 			holder.id = (TextView) convertView.findViewById(R.id.item_id);
 			holder.customer_name = (TextView) convertView.findViewById(R.id.item_customer_name);
+			holder.total = (TextView) convertView.findViewById(R.id.item_total);
 			holder.date = (TextView) convertView.findViewById(R.id.item_date);
 			
 			convertView.setTag(holder);
@@ -46,10 +47,10 @@ public class OrderListAdapter extends ArrayAdapter<Order>{
         } else {
         	holder = (ViewHolder) convertView.getTag();
         }
-        
-        Log.i("couco2", item.id);
-		holder.id.setText(""+item.id);
+
+		holder.id.setText("#"+item.id);
 		holder.customer_name.setText(""+item.customer_name);
+		holder.total.setText(item.formattedTotal());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 		holder.date.setText(sdf.format(item.created_at));
         

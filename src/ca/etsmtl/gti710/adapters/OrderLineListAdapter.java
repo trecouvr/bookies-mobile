@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,15 +49,9 @@ public class OrderLineListAdapter extends ArrayAdapter<OrderLine> {
         }
 
 		holder.name.setText(""+item.quantity+" x "+item.product.name);
-		holder.cost.setText(""+(item.unit_cost * item.quantity)+"$");
-        Bitmap img = null;//item.getImg();
-        if (img == null) {
-        	holder.icon.setImageResource(R.drawable.ic_launcher);
-        }
-        else {
-        	holder.icon.setImageBitmap(img);
-        }
-        
+		holder.cost.setText(item.formattedTotal());
+		Context ctx = getContext();
+        holder.icon.setImageResource(ctx.getResources().getIdentifier("drawable/" + "ic_launcher", null, ctx.getPackageName()));
         
         return convertView;
     }

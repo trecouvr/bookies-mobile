@@ -1,7 +1,8 @@
 package ca.etsmtl.gti710.bookies;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -42,7 +43,7 @@ public class ItemListActivity extends FragmentActivity implements
 
 	public static String SECRET = "abc";
 	//public static String END_POINT = "https://dl.dropboxusercontent.com/u/12920251/";
-	public static String END_POINT = "http://10.196.113.44/bookies/web/app_dev.php/api/";
+	public static String END_POINT = "http://10.192.180.244/bookies/web/app_dev.php/api/";
 	protected BookiesService service;
 	protected GetDataTask task = null;
 	protected ProgressDialog progressDialog = null;
@@ -87,9 +88,9 @@ public class ItemListActivity extends FragmentActivity implements
 
 		service = restAdapter.create(BookiesService.class);
 		
-		AppContent.orders.clear();
-		
-		startGetDataTask();
+		if (AppContent.orders.isEmpty()) {
+			startGetDataTask();
+		}
 	}
 
 	/**
@@ -194,6 +195,13 @@ public class ItemListActivity extends FragmentActivity implements
 				ArrayList<Order> data = service.listPurchases();
 				AppContent.orders.clear();
 				AppContent.orders.addAll(data);
+				Collections.sort(AppContent.orders, new Comparator<Order>() {
+					@Override
+					public int compare(Order lhs, Order rhs) {
+						return lhs.created_at.compareTo(rhs.created_at);
+					}
+				});
+				Collections.reverse(AppContent.orders);
 			}
 			catch (RetrofitError e) {
 				e.printStackTrace();

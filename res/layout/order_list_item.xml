@@ -27,13 +27,25 @@
 
     <TextView
         android:id="@+id/item_customer_name"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/item_id"
         android:gravity="center_horizontal"
         android:padding="10sp"
         android:text="name"
+        android:textColorHighlight="#656565"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/item_date"
+        android:gravity="center_horizontal"
+        android:padding="10sp"
+        android:text="100$"
         android:textColorHighlight="#656565"
         android:textSize="16sp" />
 

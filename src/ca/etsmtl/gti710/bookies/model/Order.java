@@ -1,5 +1,6 @@
 package ca.etsmtl.gti710.bookies.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +9,8 @@ public class Order {
 	public String id;
 	public Date created_at;
 	public String customer_name;
-	int total_price;
+	public String customer_address;
+	public double total;
 	public ArrayList<OrderLine> lines;
 	
 	public Order() {}
@@ -19,9 +21,13 @@ public class Order {
 	public String toString() {
 		return "Order(id=" + id 
 				+ ", date=" + created_at 
-				+ ", totalPrice=" + total_price 
-				+ "', lines=" + lines
+				+ ", total=" + total + "$"
+				+ ", lines=" + lines
 				+ ")";
 	}
 	
+	public String formattedTotal() {
+		DecimalFormat formatter = new DecimalFormat("0.00");
+		return "$"+formatter.format(total);
+	}
 }
