@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +53,10 @@ public class OrderLineListAdapter extends ArrayAdapter<OrderLine> {
 		holder.name.setText(""+item.quantity+" x "+item.product.name);
 		holder.cost.setText(item.formattedTotal());
 		Context ctx = getContext();
-        holder.icon.setImageResource(ctx.getResources().getIdentifier("drawable/" + "ic_launcher", null, ctx.getPackageName()));
-        
+		//holder.icon.setImageResource(ctx.getResources().getIdentifier("drawable/" + "ic_launcher", null, ctx.getPackageName()));
+		int resId = ctx.getResources().getIdentifier("drawable/item_"+item.product.id, null, ctx.getPackageName());
+		Log.d("coucou", ""+item.product.id);
+		holder.icon.setImageResource(resId);
         return convertView;
     }
 	
