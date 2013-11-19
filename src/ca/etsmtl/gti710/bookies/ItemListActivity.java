@@ -43,7 +43,8 @@ public class ItemListActivity extends FragmentActivity implements
 
 	public static String SECRET = "abc";
 	//public static String END_POINT = "https://dl.dropboxusercontent.com/u/12920251/";
-	public static String END_POINT = "http://192.168.43.167/bookies/web/app_dev.php/api/";
+	//public static String END_POINT = "http://192.168.43.167/bookies/web/app_dev.php/api/";
+	public static String END_POINT = "http://www.dtrn.co/bookies-app/web/app_dev.php/api/";
 	protected BookiesService service;
 	protected GetDataTask task = null;
 	protected ProgressDialog progressDialog = null;
