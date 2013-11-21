@@ -55,7 +55,6 @@ public class OrderLineListAdapter extends ArrayAdapter<OrderLine> {
 		Context ctx = getContext();
 		//holder.icon.setImageResource(ctx.getResources().getIdentifier("drawable/" + "ic_launcher", null, ctx.getPackageName()));
 		int resId = ctx.getResources().getIdentifier("drawable/item_"+item.product.id, null, ctx.getPackageName());
-		Log.d("coucou", ""+item.product.id);
 		holder.icon.setImageResource(resId);
         return convertView;
     }

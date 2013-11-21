@@ -71,7 +71,7 @@ public class ItemDetailFragment extends Fragment {
 			((TextView) rootView.findViewById(R.id.total))
 					.setText(order.formattedTotal());
 			((TextView) rootView.findViewById(R.id.customer_address))
-					.setText(order.customer_address);
+					.setText(order.customer_name+"\n"+order.customer_address);
 			
 	        ListView lv = (ListView)rootView.findViewById(R.id.list);
 
